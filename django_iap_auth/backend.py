@@ -60,6 +60,8 @@ class IAPBackend(BaseBackend):
 
     def _validate(self, iap_jwt) -> Optional[Mapping[str, str]]:
         key = self._get_public_key(iap_jwt)
+        if not key:
+            return None
         try:
             return jwt.decode(iap_jwt, certs=key, audience=self.audience)
         except Exception:
