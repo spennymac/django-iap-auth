@@ -107,11 +107,10 @@ class IAPBackend(BaseBackend):
         return user
 
     def _get_public_key(self, iap_jwt: str) -> Optional[str]:
-        key_id = jwt.decode_header(iap_jwt).get('kid')
-        if not key_id:
-            return None
-
         try:
+            key_id = jwt.decode_header(iap_jwt).get('kid')
+            if not key_id:
+                return None
             if key_id not in self.keys:
                 # invalidate cache
                 del self.keys
