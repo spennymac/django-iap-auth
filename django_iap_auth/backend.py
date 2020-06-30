@@ -108,15 +108,20 @@ class IAPBackend(BaseBackend):
         key_id = jwt.decode_header(iap_jwt).get('kid')
         if not key_id:
             return None
-        if key_id not in self.keys:
-            # invalidate cache
-            del self.keys
 
-            # refetch
+        try:
             if key_id not in self.keys:
-                raise Exception(f'key {key_id} not found')
+                # invalidate cache
+                del self.keys
 
-        return self.keys[key_id]
+                # refetch
+                if key_id not in self.keys:
+                    logging.error(f'public key {key_id} not found')
+                    return None
+
+            return self.keys[key_id]
+        except Exception:
+            logging.exception(f'failed to retrieve public keys')
 
     def get_user(self, user_id):
         try:
