@@ -122,6 +122,7 @@ class IAPBackend(BaseBackend):
             return self.keys[key_id]
         except Exception:
             logging.exception(f'failed to retrieve public keys')
+            return None
 
     def get_user(self, user_id):
         try:
