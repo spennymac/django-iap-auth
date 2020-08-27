@@ -65,14 +65,11 @@ setup(
     zip_safe=False,
     keywords='django-iap-auth',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Programming Language :: Python :: 3.8',
         'Framework :: Django :: 3.0',
         'Framework :: Django :: 3.1',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
     ],
 )
